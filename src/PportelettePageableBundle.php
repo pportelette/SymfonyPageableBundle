@@ -13,8 +13,4 @@ class PportelettePageableBundle extends Bundle
     {
         return \dirname(__DIR__);
     }
-
-    public function getName(): string {
-        return 'PageableBundle';
-    }
 }
