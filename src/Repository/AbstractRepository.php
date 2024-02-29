@@ -12,12 +12,21 @@ use Pportelette\PageableBundle\Model\Pageable;
 
 abstract class AbstractRepository extends ServiceEntityRepository
 {
+    protected static $nbPerPage = 30;
+
     protected function __construct(ManagerRegistry $registry, string $entityClass)
     {
         parent::__construct($registry, $entityClass);
     }
 
-    protected function getPage(QueryBuilder $qb, int $page, int $limit = 30) {
+    public static function setNbPerPage(int $nb) {
+        self::$nbPerPage = $nb;
+    }
+
+    protected function getPage(QueryBuilder $qb, int $page, int $limit = null) {
+        if(!$limit) {
+            $limit = self::$nbPerPage;
+        }
         $firstResult = ($page -1) * $limit;
 
         $criteria = Criteria::create()
