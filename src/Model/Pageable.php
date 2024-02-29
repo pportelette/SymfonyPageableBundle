@@ -13,7 +13,7 @@ class Pageable {
   public function __construct(Paginator $paginator, int $page, int $nbPerPage) {
     $this->page = $page;
     $this->total = $paginator->count();
-    $this->results = $paginator->getIterator();
+    $this->results = $paginator->getIterator()->getArrayCopy();
     $this->nbPerPage = $nbPerPage;
   }
 }
