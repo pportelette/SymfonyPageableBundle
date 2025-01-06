@@ -13,17 +13,19 @@ use Pportelette\PageableBundle\Model\Pageable;
 abstract class AbstractRepository extends ServiceEntityRepository
 {
     protected static $nbPerPage = 30;
+    protected $_em = null;
 
     protected function __construct(ManagerRegistry $registry, string $entityClass)
     {
         parent::__construct($registry, $entityClass);
+        $this->_em = $this->getEntityManager();
     }
 
     public static function setNbPerPage(int $nb) {
         self::$nbPerPage = $nb;
     }
 
-    protected function getPage(QueryBuilder $qb, int $page, int $limit = null) {
+    protected function getPage(QueryBuilder $qb, int $page, ?int $limit = null) {
         if(!$limit) {
             $limit = self::$nbPerPage;
         }
