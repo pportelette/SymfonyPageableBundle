@@ -7,7 +7,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class Pageable {
   public ?int $page = null;
   public ?int $total = null;
-  public ?int $items = null;
+  public ?array $items = null;
   public ?int $nbPerPage = null;
   public ?int $nbPages = null;
 
